@@ -13,6 +13,7 @@ char *getline_buffer(char *buffer, size_t buff_size)
 	{
 		perror("characters is -1");
 		free(buffer);
+		buffer = NULL;
 		return (NULL);
 	}
 	getline_buffer = (char *)malloc(sizeof(char) * length + 1);
@@ -20,7 +21,9 @@ char *getline_buffer(char *buffer, size_t buff_size)
 	{
 		perror("getline_buffer is NULL or characters = -1");
 		free(buffer);
+		buffer = NULL;
 		free(getline_buffer);
+		getline_buffer = NULL;
 		return (NULL);
 	}
 	strcpy(getline_buffer, buffer);

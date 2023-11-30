@@ -25,7 +25,6 @@ int main (void)
 	if (buffer == NULL)
 	{
 		perror("buffer is -1");
-		free(buffer);
 		return (-1);
 	}
 	x = 0;
@@ -36,14 +35,13 @@ int main (void)
 		if (get_line_buffer == NULL)
 		{
 			perror("getline_buffer is NULL\n");
-			free(buffer);
 			free(get_line_buffer);
+			free(buffer);
 			return (-1);
 		}
 		if (!strcmp(get_line_buffer, "exit")) 
 		{
 			free(get_line_buffer);
-			free(buffer);
 			exit(1);
 		}
 		tokenized_array = tokenize_array(get_line_buffer, tokenized_array_size);
@@ -70,13 +68,11 @@ int main (void)
 			{
 				free(tokenized_array[i]);
 			}
-			free(get_line_buffer);
 			free(buffer);
 			return (-1);
 		}
 		x++;
 		free(buffer);
-		free(get_line_buffer);
 		for (i = 0; tokenized_array[i]; i++)
 		{
 			free(tokenized_array[i]);
