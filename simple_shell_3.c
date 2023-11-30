@@ -43,15 +43,9 @@ int main (void)
 			exit(1);
 		}
 		i = 0;
-		printf("The buffer: %s\n", get_line_buffer);
 		tokenized_array = tokenize_array(get_line_buffer, tokenized_array_size);
-		for (i = 0; tokenized_array[i]; i++)
-		{
-			printf("The value of the tokenized_buffer at %d index is %s\n and the length is %lu\n", i, tokenized_array[i], strlen(tokenized_array[i]));
-		}
 		full_path = find_path(tokenized_array[0]);
 		tokenized_array[0] = full_path;
-		printf("%s\n", tokenized_array[0]);
 		value = fork_process(tokenized_array);
 		if (value == -1)
 		{

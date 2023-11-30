@@ -20,7 +20,6 @@ char **tokenize_array(char *getline_buffer, size_t tokenized_buffer_size)
 	{
 		stored_buffer = strdup(token);
 		tokenized_array[i] = stored_buffer;
-		printf("%s\n", tokenized_array[i]);
 		i++;
 		token = strtok(NULL, " ");
 		stored_buffer = NULL;

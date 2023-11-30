@@ -103,20 +103,5 @@ char *find_path(char *command)
 	free(catToken);
     }
     free_array(tokenArray);
-    printf("No such file or directory\n");
     return (NULL);
-}
-/*
- * -caller MUST free find_path's return
- */
-int main()
-{
-  char *path;
-  char *command;
-  command = "ls";
-  path = find_path(command);
-  if (path)
-  	printf("Path found: %s\n", path);
-  free(path);
-  return 0;
 }
