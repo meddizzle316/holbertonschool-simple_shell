@@ -9,8 +9,14 @@ char *getline_buffer(char *buffer, size_t buff_size)
 
 	length = strlen(buffer);
 	characters = getline(&buffer, &buff_size, stdin);
+	if (characters == -1)
+	{
+		perror("characters is -1");
+		free(buffer);
+		return (NULL);
+	}
 	getline_buffer = (char *)malloc(sizeof(char) * length + 1);
-	if (getline_buffer == NULL || characters == -1)
+	if (getline_buffer == NULL)
 	{
 		perror("getline_buffer is NULL or characters = -1");
 		free(buffer);
