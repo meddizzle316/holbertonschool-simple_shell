@@ -1,6 +1,7 @@
 #include "main.h"
 #include <sys/wait.h>
 #include <unistd.h>
+#include <sys/stat.h>
 extern char **environ;
 
 int main (void)
@@ -13,6 +14,9 @@ int main (void)
 	char *full_path;
 	int value;
 	size_t tokenized_array_size;
+	
+	struct stat fileInfo; /*should add to new function "does_exist" */
+	int does_exist;
 
 	tokenized_array_size = 12;
 	buff_size = 32;
@@ -42,10 +46,23 @@ int main (void)
 			free(buffer);
 			exit(1);
 		}
-		i = 0;
 		tokenized_array = tokenize_array(get_line_buffer, tokenized_array_size);
-		full_path = find_path(tokenized_array[0]);
-		tokenized_array[0] = full_path;
+		/* make into separate function of "does_exist" */
+		i = 0;
+		does_exist = 0;
+		while (tokenized_array[i])
+		{
+			if (stat(tokenized_array[i], &fileInfo) == 0)
+			{
+				does_exist = 1;
+			}
+			i++;
+		}
+		if (does_exist == 0)
+		{
+			full_path = find_path(tokenized_array[0]);
+			tokenized_array[0] = full_path;
+		}
 		value = fork_process(tokenized_array);
 		if (value == -1)
 		{

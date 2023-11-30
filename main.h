@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 
 extern char** environ;
 char *getline_buffer(char *buffer, size_t buff_size);
