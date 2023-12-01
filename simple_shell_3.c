@@ -30,6 +30,7 @@ int main (void)
 	x = 0;
 	while (1)
 	{
+		printf("hello world");
 		printf("$ ");
 		get_line_buffer = getline_buffer(buffer, buff_size);
 		if (get_line_buffer == NULL)
