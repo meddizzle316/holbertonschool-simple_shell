@@ -16,5 +16,6 @@ int _putchar(char c);
 char **tokenize_array(char *getline_buffer, size_t tokenized_array_size);
 int fork_process(char **tokenized_array);
 char *find_path(char *command);
+char *init_buffer(size_t buff_size);
 
 #endif
