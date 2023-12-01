@@ -21,15 +21,10 @@ int main (void)
 	tokenized_array_size = 12;
 	buff_size = 32;
 	buffer = NULL;
-	buffer = (char *)malloc(sizeof(char) * buff_size); 
-	if (buffer == NULL)
-	{
-		perror("buffer is -1");
-		return (-1);
-	}
 	x = 0;
 	while (1)
 	{
+		buffer = init_buffer(buff_size);
 		get_line_buffer = getline_buffer(buffer, buff_size);
 		if (get_line_buffer == NULL)
 		{
