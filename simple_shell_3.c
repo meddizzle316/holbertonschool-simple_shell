@@ -24,6 +24,7 @@ int main (void)
 	x = 0;
 	while (1)
 	{
+		printf("$ ");
 		buffer = init_buffer(buff_size);
 		get_line_buffer = getline_buffer(buffer, buff_size);
 		if (get_line_buffer == NULL)
