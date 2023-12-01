@@ -42,7 +42,10 @@ char **tokenize_path(char *path)
 	}
 	tokenArray = malloc(sizeof(char *) * (count + 2));
 	if (!tokenArray)
+	{
+		free(tokenArray);
 		return (NULL);
+	}
 	tmpToken = strtok(path, ":");
 	i = 0;
 	while (tmpToken)
@@ -52,6 +55,12 @@ char **tokenize_path(char *path)
 		i++;
 	}
 	tokenArray[i] = NULL;
+	i = 0;
+	while (tokenArray[i])
+	{
+		printf("token path func - array \nindex-%d\n value-%s\n", i, tokenArray[i]);
+		i++;
+	}
 	return (tokenArray);
 }
 /*
@@ -79,10 +88,15 @@ char *find_path(char *command)
 
 	/*get the full PATH variable*/
 	path = get_path_var(command);
-
+	if (!path)
+		return (NULL);
 	/*tokenize the PATH variable*/
 	tokenArray = tokenize_path(path);
-
+	if (!tokenArray)
+	{
+		free_array(tokenArray);
+		return (NULL);
+	}
 	/*
 	 * loop through tokens, concat "command" to the end
 	 * of each token and test it's status

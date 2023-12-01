@@ -24,6 +24,7 @@ char **tokenize_array(char *getline_buffer, size_t tokenized_buffer_size)
 		token = strtok(NULL, " ");
 		stored_buffer = NULL;
 	}
+	free(getline_buffer);
 	tokenized_array[i] = NULL;
 	return (tokenized_array);
 }
