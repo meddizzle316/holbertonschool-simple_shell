@@ -71,6 +71,7 @@ int main (void)
 		{
 			free(tokenized_array[i]);
 		}
+		free(tokenized_array);
 	}
 
 	return (0);
