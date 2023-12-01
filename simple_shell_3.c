@@ -30,7 +30,6 @@ int main (void)
 	x = 0;
 	while (1)
 	{
-		printf("hello world");
 		printf("$ ");
 		get_line_buffer = getline_buffer(buffer, buff_size);
 		if (get_line_buffer == NULL)
@@ -43,7 +42,7 @@ int main (void)
 		if (!strcmp(get_line_buffer, "exit")) 
 		{
 			free(get_line_buffer);
-			exit(1);
+			exit(0);
 		}
 		tokenized_array = tokenize_array(get_line_buffer, tokenized_array_size);
 		/* make into separate function of "does_exist" */
