@@ -29,15 +29,13 @@ int main (void)
 		get_line_buffer = getline_buffer(buffer, buff_size);
 		if (get_line_buffer == NULL)
 		{
-			perror("getline_buffer is NULL\n");
-			free(get_line_buffer);
-			free(buffer);
+			perror("getline_buffer is NULL\n");/*remove later*/
 			return (-1);
 		}
 		if (!strcmp(get_line_buffer, "exit")) 
 		{
 			free(get_line_buffer);
-			exit(0);
+			return(0);
 		}
 		tokenized_array = tokenize_array(get_line_buffer, tokenized_array_size);
 		/* make into separate function of "does_exist" */
@@ -54,25 +52,17 @@ int main (void)
 		if (does_exist == 0)
 		{
 			full_path = find_path(tokenized_array[0]);
+			free(tokenized_array[0]);
 			tokenized_array[0] = full_path;
 		}
 		value = fork_process(tokenized_array);
 		if (value == -1)
 		{
-			for (i = 0; tokenized_array[i]; i++)
-			{
-				free(tokenized_array[i]);
-			}
-			free(buffer);
+			free_array(tokenized_array);
 			return (-1);
 		}
 		x++;
-		free(buffer);
-		for (i = 0; tokenized_array[i]; i++)
-		{
-			free(tokenized_array[i]);
-		}
-		free(tokenized_array);
+		free_array(tokenized_array);
 	}
 
 	return (0);

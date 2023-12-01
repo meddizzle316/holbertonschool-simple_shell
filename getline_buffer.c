@@ -7,9 +7,9 @@ char *getline_buffer(char *buffer, size_t buff_size)
 	int i;
 
 	characters = getline(&buffer, &buff_size, stdin);
-	if (characters == -1)
+	if (characters == -1 || characters == 0)
 	{
-		perror("characters is -1");
+		perror("characters is -1 maybe?");
 		free(buffer);
 		buffer = NULL;
 		return (NULL);
@@ -25,6 +25,7 @@ char *getline_buffer(char *buffer, size_t buff_size)
 		return (NULL);
 	}
 	strcpy(getline_buffer, buffer);
+	printf("In getline func. result of strcpy %s", getline_buffer);/*Remove later*/
 	for (i = 0; getline_buffer[i]; i++)
 	{
 		if (getline_buffer[i] == '\n')
@@ -32,5 +33,6 @@ char *getline_buffer(char *buffer, size_t buff_size)
 			getline_buffer[i] = '\0';
 		}
 	}
+	free(buffer);
 	return (getline_buffer);
 }
