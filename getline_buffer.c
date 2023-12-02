@@ -12,7 +12,7 @@ char *getline_buffer(void)
 	characters = getline(&buffer, &buff_size, stdin);
 	if (characters <= 0)
 	{
-		printf("in getline_buffer() - characters/getline() failed\n");/*remove later*/
+		/*printf("in getline_buffer() - characters/getline() failed\n");remove later*/
 		free(buffer);
 		buffer = NULL;
 		return (NULL);
@@ -20,7 +20,7 @@ char *getline_buffer(void)
 	getline_buffer = (char *)malloc(sizeof(char) * characters + 1);
 	if (getline_buffer == NULL)
 	{
-		printf("in getline_buffer() - malloc failed\n");/*remove later*/
+		/*printf("in getline_buffer() - malloc failed\n");remove later*/
 		free(buffer);
 		buffer = NULL;
 		free(getline_buffer);

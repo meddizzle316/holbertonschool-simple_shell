@@ -1,9 +1,10 @@
 #include "main.h"
 
-void prompt(int file_d, struct stat fileInfo)
+int prompt()
 {
-	fstat(file_d, &fileInfo);
-
-	if (S_ISCHR(fileInfo.st_mode))
+	if (isatty(STDIN_FILENO))/*if connected to terminal(print promt) else (set flag to break loop)*/
 		printf("$ ");
+	else/*not connected to terminal*/
+		return (1);
+	return (0);
 }
