@@ -42,6 +42,8 @@ int main (void)
 		}
 		x++;
 		free_array(tokenized_array);
+		if (!isatty(STDIN_FILENO))/*if not connect to terminal(aka command is piped) break loop*/
+			break;
 	}
 	exit(0);
 }
