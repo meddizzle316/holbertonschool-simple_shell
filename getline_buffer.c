@@ -9,7 +9,7 @@ char *getline_buffer(char *buffer, size_t buff_size)
 	characters = getline(&buffer, &buff_size, stdin);
 	if (characters == -1 || characters == 0)
 	{
-		perror("characters is -1 maybe?");
+		printf("in getline_buffer() - characters/getline() failed\n");/*remove later*/
 		free(buffer);
 		buffer = NULL;
 		return (NULL);
@@ -17,7 +17,7 @@ char *getline_buffer(char *buffer, size_t buff_size)
 	getline_buffer = (char *)malloc(sizeof(char) * characters + 1);
 	if (getline_buffer == NULL)
 	{
-		perror("getline_buffer is NULL or characters = -1");
+		printf("in getline_buffer() - malloc failed\n");/*remove later*/
 		free(buffer);
 		buffer = NULL;
 		free(getline_buffer);
@@ -25,7 +25,6 @@ char *getline_buffer(char *buffer, size_t buff_size)
 		return (NULL);
 	}
 	strcpy(getline_buffer, buffer);
-	printf("In getline func. result of strcpy %s", getline_buffer);/*Remove later*/
 	for (i = 0; getline_buffer[i]; i++)
 	{
 		if (getline_buffer[i] == '\n')
