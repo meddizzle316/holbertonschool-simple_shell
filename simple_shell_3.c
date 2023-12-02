@@ -10,13 +10,13 @@ int main (void)
 	int x = 0, value;
 	size_t tokenized_array_size = 12;
 
-	while (1)
+	while (!feof(stdin))
 	{
-		/*printf("Loop #%d - $\n", x);change back to normal promt*/
+		printf("Loop #%d - $\n", x);/*change back to normal promt*/
 		get_line_buffer = getline_buffer();
 		if (get_line_buffer == NULL)
 		{
-			/*printf("in main() - get_line_buffer = NULL\n");remove later*/
+			printf("in main() - get_line_buffer = NULL\n");/*remove later*/
 			return (-1);
 		}
 		if (!strcmp(get_line_buffer, "exit"))
