@@ -6,15 +6,14 @@ extern char **environ;
 
 int main (void)
 { 
-	char *buffer = NULL, *get_line_buffer, *full_path, **tokenized_array;
+	char *get_line_buffer, *full_path, **tokenized_array;
 	int x = 0, value;
-	size_t tokenized_array_size = 12, buff_size = 32;
+	size_t tokenized_array_size = 12;
 
 	while (1)
 	{
 		printf("Loop #%d - $\n", x);/*change back to normal promt*/
-		buffer = init_buffer(buff_size);
-		get_line_buffer = getline_buffer(buffer, buff_size);
+		get_line_buffer = getline_buffer();
 		if (get_line_buffer == NULL)
 		{
 			printf("in main() - get_line_buffer = NULL\n"); /*remove later*/
