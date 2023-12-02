@@ -5,9 +5,10 @@ char *getline_buffer(void)
 	int characters;
 	char *getline_buffer, *buffer = NULL;
 	int i;
-	size_t buff_size = 32;
+	size_t buff_size = 0;
 
-	buffer = init_buffer(buff_size);
+	/*buffer = init_buffer(buff_size);*/
+	printf("buffer = %s\n", buffer);/*remove later*/
 	characters = getline(&buffer, &buff_size, stdin);
 	if (characters <= 0)
 	{

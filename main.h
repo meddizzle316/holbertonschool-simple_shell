@@ -18,5 +18,6 @@ int fork_process(char **tokenized_array);
 char *find_path(char *command);
 char *init_buffer(size_t buff_size);
 void free_array(char **array);
+void prompt(int file_d, struct stat fileInfo);
 
 #endif
