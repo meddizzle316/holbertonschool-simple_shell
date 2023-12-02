@@ -1,13 +1,15 @@
 #include "main.h"
 
-char *getline_buffer(char *buffer, size_t buff_size)
+char *getline_buffer(void)
 {
 	int characters;
-	char *getline_buffer;
+	char *getline_buffer, *buffer = NULL;
 	int i;
+	size_t buff_size = 32;
 
+	buffer = init_buffer(buff_size);
 	characters = getline(&buffer, &buff_size, stdin);
-	if (characters == -1 || characters == 0)
+	if (characters <= 0)
 	{
 		printf("in getline_buffer() - characters/getline() failed\n");/*remove later*/
 		free(buffer);
