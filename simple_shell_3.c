@@ -9,10 +9,12 @@ int main (void)
 	char *get_line_buffer, *full_path, **tokenized_array;
 	int x = 0, value;
 	size_t tokenized_array_size = 12;
+	struct stat fileInfo;
 
 	while (!feof(stdin))
 	{
-		printf("Loop #%d - $\n", x);/*change back to normal promt*/
+		printf("Loop #%d:\n", x);/*remove later*/
+		prompt(STDIN_FILENO, fileInfo);
 		get_line_buffer = getline_buffer();
 		if (get_line_buffer == NULL)
 		{

@@ -8,6 +8,7 @@ char *getline_buffer(void)
 	size_t buff_size = 32;
 
 	buffer = init_buffer(buff_size);
+	printf("buffer = %s\n", buffer);/*remove later*/
 	characters = getline(&buffer, &buff_size, stdin);
 	if (characters <= 0)
 	{
