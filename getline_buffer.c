@@ -1,15 +1,17 @@
 #include "main.h"
 
-char *getline_buffer(char *buffer, size_t buff_size)
+char *getline_buffer(void)
 {
 	int characters;
-	char *getline_buffer;
+	char *getline_buffer, *buffer = NULL;
 	int i;
+	size_t buff_size = 32;
 
+	buffer = init_buffer(buff_size);
 	characters = getline(&buffer, &buff_size, stdin);
-	if (characters == -1)
+	if (characters <= 0)
 	{
-		perror("characters is -1");
+		printf("in getline_buffer() - characters/getline() failed\n");/*remove later*/
 		free(buffer);
 		buffer = NULL;
 		return (NULL);
@@ -17,7 +19,7 @@ char *getline_buffer(char *buffer, size_t buff_size)
 	getline_buffer = (char *)malloc(sizeof(char) * characters + 1);
 	if (getline_buffer == NULL)
 	{
-		perror("getline_buffer is NULL or characters = -1");
+		printf("in getline_buffer() - malloc failed\n");/*remove later*/
 		free(buffer);
 		buffer = NULL;
 		free(getline_buffer);
@@ -32,5 +34,6 @@ char *getline_buffer(char *buffer, size_t buff_size)
 			getline_buffer[i] = '\0';
 		}
 	}
+	free(buffer);
 	return (getline_buffer);
 }
