@@ -55,12 +55,6 @@ char **tokenize_path(char *path)
 		i++;
 	}
 	tokenArray[i] = NULL;
-	i = 0;
-	while (tokenArray[i])
-	{
-		printf("token path func - array \nindex-%d\n value-%s\n", i, tokenArray[i]);
-		i++;
-	}
 	return (tokenArray);
 }
 /*
@@ -83,9 +77,12 @@ void free_array(char **array)
 char *find_path(char *command)
 {
 	struct stat fileInfo;
+	struct stat file;
 	char *path = NULL, **tokenArray, *catToken;
 	int i = 0;
-
+	
+	if (stat(command, &file) == 0)
+		return (command);
 	/*get the full PATH variable*/
 	path = get_path_var(command);
 	if (!path)
