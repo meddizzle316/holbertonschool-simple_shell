@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+echo -e "/bin/ls -"
+echo "/bin/ls" | ./a.out
+echo -e "\n"
+
+echo -e "ls -"
+echo "/ls" | ./a.out
+echo -e "\n"
+
+echo -e "exit -"
+echo "exit" | ./a.out
+echo -e "\n"

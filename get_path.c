@@ -1,21 +1,15 @@
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "main.h"
 
-extern char **environ;
 /*
- * get_path_var
+ * get_path_var - finds the path variable in environ
+ *
+ * Return: Path variable
  */
-char *get_path_var(char* command)
+char *get_path_var()
 {
 	char *path = NULL;
 	int i = 0;
-
-	if (!command)
-		return (NULL);
+	/*loop through environ find PATH= then set path = to that element*/
 	while (!path && environ[i])
 	{
 		if ((strncmp(environ[i], "PATH=", 5)) == 0)
@@ -27,25 +21,30 @@ char *get_path_var(char* command)
 	return (path);
 }
 /*
- * tokenize_path
+ * tokenize_path - Takes path from get_path_var and tokenizes it
+ * @path: Path passed in by get_path_var
+ *
+ * Return: **Array to each tokenized path
  */
 char **tokenize_path(char *path)
 {
 	int i = 0, count = 0;
 	char *tmpToken, **tokenArray;
-
+	/*counts how many : are in path variable*/
 	while (path[i])
 	{
 		if (path[i] == ':')
 			count++;
 		i++;
 	}
+	/*mallocs the array * count + 1 for last path and 1 for null*/
 	tokenArray = malloc(sizeof(char *) * (count + 2));
 	if (!tokenArray)
 	{
 		free(tokenArray);
 		return (NULL);
 	}
+	/*tokenize path into a tmp var and then duplicate tmp into the array*/
 	tmpToken = strtok(path, ":");
 	i = 0;
 	while (tmpToken)
@@ -58,7 +57,10 @@ char **tokenize_path(char *path)
 	return (tokenArray);
 }
 /*
- * free_array
+ * free_array - Tool to loop through an array and free each pointer
+ * @array: An array to free
+ *
+ * Return: void
  */
 void free_array(char **array)
 {
@@ -72,7 +74,10 @@ void free_array(char **array)
 	free(array);
 }
 /*
- * find_path
+ * find_path - Gets command from main and looks for its correct path
+ * @command: Command passed from main
+ *
+ * Return: Full path if found. NULL if no path found
  */
 char *find_path(char *command)
 {
@@ -80,11 +85,11 @@ char *find_path(char *command)
 	struct stat file;
 	char *path = NULL, **tokenArray, *catToken;
 	int i = 0;
-	
+	/*Checks if command is already a valid path*/
 	if (stat(command, &file) == 0)
 		return (command);
 	/*get the full PATH variable*/
-	path = get_path_var(command);
+	path = get_path_var();
 	if (!path)
 		return (NULL);
 	/*tokenize the PATH variable*/

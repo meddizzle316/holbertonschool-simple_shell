@@ -1,32 +1,24 @@
 #include "main.h"
-
+/*
+ * getline_buffer - Takes input from stdin and removes \n
+ *
+ * Return: variable containing input from stdin
+ */
 char *getline_buffer(void)
 {
-	int characters;
-	char *getline_buffer, *buffer = NULL;
-	int i;
-	size_t buff_size = 32;
+	int characters, i;
+	char *getline_buffer = NULL;
+	size_t buff_size = 0;
 
-	buffer = init_buffer(buff_size);
-	characters = getline(&buffer, &buff_size, stdin);
-	if (characters <= 0)
+	/*printf("getline_buffer = %s\n", getline_buffer);remove later*/
+	characters = getline(&getline_buffer, &buff_size, stdin);
+	if (characters <= 0 || getline_buffer == NULL)
 	{
-		printf("in getline_buffer() - characters/getline() failed\n");/*remove later*/
-		free(buffer);
-		buffer = NULL;
-		return (NULL);
-	}
-	getline_buffer = (char *)malloc(sizeof(char) * characters + 1);
-	if (getline_buffer == NULL)
-	{
-		printf("in getline_buffer() - malloc failed\n");/*remove later*/
-		free(buffer);
-		buffer = NULL;
+		/*printf("in getline_buffer() - characters/getline() failed\n");remove later*/
 		free(getline_buffer);
 		getline_buffer = NULL;
 		return (NULL);
 	}
-	strcpy(getline_buffer, buffer);
 	for (i = 0; getline_buffer[i]; i++)
 	{
 		if (getline_buffer[i] == '\n')
@@ -34,6 +26,5 @@ char *getline_buffer(void)
 			getline_buffer[i] = '\0';
 		}
 	}
-	free(buffer);
 	return (getline_buffer);
 }
