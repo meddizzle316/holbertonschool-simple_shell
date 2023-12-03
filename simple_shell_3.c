@@ -1,9 +1,9 @@
 #include "main.h"
-#include <sys/wait.h>
-#include <unistd.h>
-#include <sys/stat.h>
-extern char **environ;
-
+/*
+ * main - entry point into program
+ *
+ * Return: 0 on success
+ */
 int main (void)
 { 
 	char *get_line_buffer, *full_path, **tokenized_array;
@@ -12,8 +12,8 @@ int main (void)
 
 	while (!feof(stdin))
 	{
-		/*printf("Loop #%d:\n", x);remove later*/
-		flag = prompt();/*checks if connect to terminal. If it is (print promt and return 0) if not (return 1)*/
+		/*checks if connected to terminal. If it is (print prompt and return 0) if not (return 1)*/
+		flag = prompt();
 		get_line_buffer = getline_buffer();
 		if (get_line_buffer == NULL)
 		{
@@ -22,7 +22,6 @@ int main (void)
 		}
 		if (!strcmp(get_line_buffer, "exit"))
 		{
-			fflush(stdout);
 			free(get_line_buffer);
 			break;
 		}
@@ -44,5 +43,5 @@ int main (void)
 		if (flag == 1)/*if not connect to terminal*/
 			break;
 	}
-	exit(0);
+	return (0);
 }
