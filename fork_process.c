@@ -1,5 +1,4 @@
 #include "main.h"
-#include <sys/wait.h>
 /**
  * fork_process - creates a new child and executes said child
  * @tokenized_array: array of tokenized words/commands
