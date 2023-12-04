@@ -79,26 +79,18 @@ void free_array(char **array)
  *
  * Return: Full path if found. NULL if no path found
  */
-char *find_path(char *command)
+char *find_path(char *command, char **tokenArray)
 {
 	struct stat fileInfo;
 	struct stat file;
-	char *path = NULL, **tokenArray, *catToken;
+	char *catToken;
 	int i = 0;
 	/*Checks if command is already a valid path*/
 	if (stat(command, &file) == 0)
 		return (command);
-	/*get the full PATH variable*/
-	path = get_path_var();
-	if (!path)
-		return (NULL);
-	/*tokenize the PATH variable*/
-	tokenArray = tokenize_path(path);
-	if (!tokenArray)
-	{
-		free_array(tokenArray);
-		return (NULL);
-	}
+	/*moved getting the full PATH variable to before while loop*/
+	/*ditto for tokenizing the Path, moved to before while loop*/
+
 	/*
 	 * loop through tokens, concat "command" to the end
 	 * of each token and test it's status
@@ -113,12 +105,12 @@ char *find_path(char *command)
 		strcat(catToken, command);
 		if (stat(catToken, &fileInfo) == 0)
 		{
-			free_array(tokenArray);
+			/*removed freeing tokenArray, put in main function */
 			return (catToken);
 		}
 		i++;
 		free(catToken);
 	}
-	free_array(tokenArray);
+	/*removed freeing tokenArray, put in main function*/
 	return (NULL);
 }
