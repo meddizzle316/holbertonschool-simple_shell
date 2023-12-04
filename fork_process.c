@@ -5,7 +5,7 @@
  *
  * Return: 0 if success, -1 if failure
  */
-int fork_process(char **tokenized_array)
+int fork_process(char **tokenized_array, char* full_path)
 {
 	pid_t my_pid;
 	int status;
@@ -19,7 +19,7 @@ int fork_process(char **tokenized_array)
 	}
 	else if (my_pid == 0)
 	{
-		value = execve(tokenized_array[0], tokenized_array, environ);
+		value = execve(full_path, tokenized_array, NULL);
 		if (value == -1)
 		{
 			perror("value is -1\n");
