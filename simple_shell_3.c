@@ -50,14 +50,21 @@ int main (void)
 		for (i = 0; i < 5; i++)
 			tmp_array[i] = NULL;
 		i = 0;
+		for ( ; tokenized_array[i]; i++)
+		{
+			printf("tokenized array is %s at %d and length is %lu\n", tokenized_array[i], i, strlen(tokenized_array[i]));
+		}
+		i = 0;
 		while (tokenized_array[i])
 		{
 			tmp_path_is_null = 1;
 			full_path = find_path(tokenized_array[i], tokenArray);/*if array[0] is full path it just returns array[0]*/
+			printf("the full_path is %s\n", full_path);
 			if (tokenized_array[i + 1])
 			{
 				tmp_path_is_null = 0;
 				tmp_path = find_path(tokenized_array[i + 1], tokenArray);
+				printf("the tmp_path is %s\n", tmp_path);
 			}
 			if(full_path)
 			{

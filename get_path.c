@@ -87,10 +87,12 @@ char *find_path(char *command, char **tokenArray)
 	int i = 0;
 	char *copied_command;
 	/*Checks if command is already a valid path*/
-	if (stat(command, &file) == 0)
-	{
+	if (stat(command, &file) == 0 && file.st_mode & S_IXUSR && S_ISREG(file.st_mode))
+	{	
+		printf("%d\n", file.st_mode);
 		copied_command = malloc(sizeof(char) * strlen(command) + 2);
 		strcpy(copied_command, command);
+		printf("command is already a valid path\n");
 		return (copied_command);
 	}
 	/*
@@ -110,6 +112,7 @@ char *find_path(char *command, char **tokenArray)
 		if (stat(catToken, &fileInfo) == 0)
 		{
 			/*removed freeing tokenArray, put in main function */
+			printf("successfully concated catToken\n");
 			return (catToken);
 		}
 		i++;
