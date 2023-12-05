@@ -42,14 +42,13 @@ int main (void)
 		i = 0;
 		while (tokenized_array[i])
 		{
-			printf("Array element #%d - '%s'\n", i, tokenized_array[i]);/*remove later*/
 			full_path = find_path(tokenized_array[i], tokenArray);/*if array[0] is full path it just returns array[0]*/
-			tmp_path = find_path(tokenized_array[i + 1], tokenArray);
-			printf("Array element path - '%s'\n", full_path);
+			if (tokenized_array[i + 1])
+				tmp_path = find_path(tokenized_array[i + 1], tokenArray);
 			if(full_path)
 			{
 				tmp_array[0] = tokenized_array[i];
-				if (!tmp_path)
+				if (!tmp_path && tokenized_array[i + 1] != NULL)
 				{
 					tmp_array[1] = tokenized_array[i + 1];
 					i++;
