@@ -29,7 +29,6 @@ int main (void)
 		get_line_buffer = getline_buffer(flag);
 		if (get_line_buffer == NULL)
 		{	
-			/*printf("in main() - get_line_buffer = NULL\n");remove later*/
 			free (get_line_buffer);
 			return (-1);
 		}
@@ -42,7 +41,8 @@ int main (void)
 		tmp_array = malloc(sizeof(char*) * 5);
 		if (!tmp_array)
 		{
-			free(tmp_array);
+			free_array(tokenized_array);
+			free_array(tmp_array);
 			return (-1);
 		}
 		for (i = 0; i < 5; i++)
