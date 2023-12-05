@@ -87,8 +87,8 @@ char *find_path(char *command, char **tokenArray)
 	int i = 0;
 	char *copied_command;
 	/*Checks if command is already a valid path*/
-	if (stat(command, &file) == 0)
-	{
+	if (stat(command, &file) == 0 && file.st_mode & S_IXUSR && S_ISREG(file.st_mode))
+	{	
 		copied_command = malloc(sizeof(char) * strlen(command) + 2);
 		strcpy(copied_command, command);
 		return (copied_command);
