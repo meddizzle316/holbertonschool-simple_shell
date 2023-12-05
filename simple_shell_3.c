@@ -6,7 +6,7 @@
  */
 int main (void)
 { 
-	char *get_line_buffer, *full_path, **tokenized_array;
+	char *get_line_buffer = NULL, *full_path = NULL, **tokenized_array, **tmp_array, *tmp_path = NULL;
 	int x = 0, value, flag = 0;
 	size_t tokenized_array_size = 12;
 	int i;
@@ -26,39 +26,57 @@ int main (void)
 	{
 		/*checks if connected to terminal. If it is (print prompt and return 0) if not (return 1)*/
 		flag = prompt();
-		get_line_buffer = getline_buffer();
+		get_line_buffer = getline_buffer(flag);
 		if (get_line_buffer == NULL)
-		{
+		{	
 			/*printf("in main() - get_line_buffer = NULL\n");remove later*/
+			free (get_line_buffer);
 			return (-1);
 		}
-		if (!strcmp(get_line_buffer, "exit"))
+		if (!strcmp(get_line_buffer, "exit"))/*broken somehow*/
 		{
 			free(get_line_buffer);
 			break;
 		}
 		tokenized_array = tokenize_array(get_line_buffer, tokenized_array_size);
+		tmp_array = malloc(sizeof(char*) * 5);
+		if (!tmp_array)
+		{
+			free(tmp_array);
+			return (-1);
+		}
+		for (i = 0; i < 5; i++)
+			tmp_array[i] = NULL;
 		i = 0;
 		while (tokenized_array[i])
 		{
 			full_path = find_path(tokenized_array[i], tokenArray);/*if array[0] is full path it just returns array[0]*/
-			if (!full_path)
+			if (tokenized_array[i + 1])
+				tmp_path = find_path(tokenized_array[i + 1], tokenArray);
+			if(full_path)
 			{
-				i++;
-				continue;
+				tmp_array[0] = tokenized_array[i];
+				if (!tmp_path && tokenized_array[i + 1] != NULL)
+				{
+					tmp_array[1] = tokenized_array[i + 1];
+					i++;
+				}
+				value = fork_process(tmp_array, full_path);
 			}
-			value = fork_process(tokenized_array, full_path);
 			if (value == -1)
 			{
 				perror("value is -1");
 			}
+			tmp_array[0] = NULL;
+			tmp_array[1] = NULL;
 			i++;
 		}
 		x++;
+		free_array(tmp_array);
 		free_array(tokenized_array);
 		if (flag == 1)/*if not connect to terminal*/
 			break;
 	}
 	free_array(tokenArray);
-	return (0);
+	exit (0);
 }
