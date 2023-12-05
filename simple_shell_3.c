@@ -26,13 +26,14 @@ int main (void)
 	{
 		/*checks if connected to terminal. If it is (print prompt and return 0) if not (return 1)*/
 		flag = prompt();
-		get_line_buffer = getline_buffer();
+		get_line_buffer = getline_buffer(flag);
 		if (get_line_buffer == NULL)
 		{	
 			/*printf("in main() - get_line_buffer = NULL\n");remove later*/
+			free (get_line_buffer);
 			return (-1);
 		}
-		if (!strcmp(get_line_buffer, "exit"))
+		if (!strcmp(get_line_buffer, "exit"))/*broken somehow*/
 		{
 			free(get_line_buffer);
 			break;
