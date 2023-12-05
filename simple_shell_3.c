@@ -32,7 +32,7 @@ int main (void)
 			free (get_line_buffer);
 			return (-1);
 		}
-		if (!strcmp(get_line_buffer, "exit"))/*broken somehow*/
+		if (!strcmp(get_line_buffer, "exit "))/*broken somehow*/
 		{
 			free(get_line_buffer);
 			break;

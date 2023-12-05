@@ -11,6 +11,7 @@ char *getline_buffer(int flag)
 	size_t buff_size = 0;
 
 	getline_buffer = malloc(sizeof(char *) * 5);	
+	getline_buffer[0] = '\0';
 	if (flag == 1)
 	{
 		while ((getline(&buffer, &buff_size, stdin)) != -1)
