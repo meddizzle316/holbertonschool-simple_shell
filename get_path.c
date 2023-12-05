@@ -71,6 +71,7 @@ void free_array(char **array)
 			i++;
 		}
 	free(array);
+
 }
 /*
  * find_path - Gets command from main and looks for its correct path
