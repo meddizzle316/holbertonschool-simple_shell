@@ -87,10 +87,9 @@ char *find_path(char *command, char **tokenArray)
 	int i = 0;
 	/*Checks if command is already a valid path*/
 	if (stat(command, &file) == 0)
+	{
 		return (command);
-	/*moved getting the full PATH variable to before while loop*/
-	/*ditto for tokenizing the Path, moved to before while loop*/
-
+	}
 	/*
 	 * loop through tokens, concat "command" to the end
 	 * of each token and test it's status
@@ -99,7 +98,9 @@ char *find_path(char *command, char **tokenArray)
 	{
 		catToken = malloc(strlen(tokenArray[i]) + strlen(command) + 2);
 		if (!catToken)
+		{
 			return (NULL);
+		}
 		strcpy(catToken, tokenArray[i]);
 		strcat(catToken, "/");
 		strcat(catToken, command);

@@ -78,5 +78,5 @@ int main (void)
 			break;
 	}
 	free_array(tokenArray);
-	return (0);
+	exit (0);
 }

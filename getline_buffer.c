@@ -16,6 +16,8 @@ char *getline_buffer(int flag)
 		while ((getline(&buffer, &buff_size, stdin)) != -1)
 		{
 			strcat(getline_buffer, buffer);
+			free(buffer);
+			buffer = NULL;
 		}
 	}
 	if (flag == 0)
@@ -36,5 +38,6 @@ char *getline_buffer(int flag)
 		}
 	}
 	free(buffer);
+	buffer = NULL;
 	return (getline_buffer);
 }
