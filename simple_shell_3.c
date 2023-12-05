@@ -6,13 +6,14 @@
  */
 int main (void)
 { 
-	char *get_line_buffer = NULL, *full_path = NULL, **tokenized_array, **tmp_array, *tmp_path = NULL;
+	char *get_line_buffer = NULL, *full_path = NULL, **tokenized_array, *tmp_path = NULL;
 	int x = 0, value, flag = 0;
 	size_t tokenized_array_size = 12;
 	int i;
 	char *path; /*added path variable to main, finding PATH once */
 	char **tokenArray; /*added tokenArray to main, tokenizing Path once */
-
+	char **tmp_array;
+	int tmp_path_is_null;
 	path = get_path_var();
 	if (!path)
 		return (-1);
@@ -38,7 +39,8 @@ int main (void)
 			break;
 		}
 		tokenized_array = tokenize_array(get_line_buffer, tokenized_array_size);
-		tmp_array = malloc(sizeof(char*) * 5);
+		
+		tmp_array = malloc(sizeof(char*) * 100);
 		if (!tmp_array)
 		{
 			free_array(tokenized_array);
@@ -50,15 +52,21 @@ int main (void)
 		i = 0;
 		while (tokenized_array[i])
 		{
+			tmp_path_is_null = 1;
 			full_path = find_path(tokenized_array[i], tokenArray);/*if array[0] is full path it just returns array[0]*/
 			if (tokenized_array[i + 1])
+			{
+				tmp_path_is_null = 0;
 				tmp_path = find_path(tokenized_array[i + 1], tokenArray);
+			}
 			if(full_path)
 			{
 				tmp_array[0] = tokenized_array[i];
+				/* strcpy(tmp_array[0], tokenized_array[i]); */
 				if (!tmp_path && tokenized_array[i + 1] != NULL)
 				{
 					tmp_array[1] = tokenized_array[i + 1];
+					/* strcpy(tmp_array[1], tokenized_array[i + 1]); */
 					i++;
 				}
 				value = fork_process(tmp_array, full_path);
@@ -70,13 +78,22 @@ int main (void)
 			tmp_array[0] = NULL;
 			tmp_array[1] = NULL;
 			i++;
+			free(full_path);
+			if (tmp_path_is_null == 0)
+			{
+				free(tmp_path);
+			}
 		}
 		x++;
+		/*free_array(tmp_array); */
 		free_array(tmp_array);
 		free_array(tokenized_array);
 		if (flag == 1)/*if not connect to terminal*/
 			break;
 	}
-	free_array(tokenArray);
+	if (tokenArray)
+	{
+		free_array(tokenArray);
+	}
 	exit (0);
 }

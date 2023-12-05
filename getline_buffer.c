@@ -10,7 +10,7 @@ char *getline_buffer(int flag)
 	char *getline_buffer = NULL, *buffer = NULL;
 	size_t buff_size = 0;
 
-	getline_buffer = malloc(sizeof(char *) * 5);	
+	getline_buffer = malloc(sizeof(char *) * 5);
 	getline_buffer[0] = '\0';
 	if (flag == 1)
 	{
