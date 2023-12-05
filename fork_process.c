@@ -19,7 +19,7 @@ int fork_process(char **tokenized_array, char* full_path)
 	}
 	else if (my_pid == 0)
 	{
-		value = execve(full_path, tokenized_array, NULL);
+		value = execve(full_path, tokenized_array, environ);
 		if (value == -1)
 		{
 			perror("value is -1\n");
