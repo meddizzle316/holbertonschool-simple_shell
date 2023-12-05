@@ -9,12 +9,13 @@ char *getline_buffer(int flag)
 	int i;
 	char *getline_buffer = NULL, *buffer = NULL;
 	size_t buff_size = 0;
-	
-	getline_buffer = malloc(sizeof(char*) * 10);
+
+	getline_buffer = malloc(sizeof(char *) * 5);	
 	if (flag == 1)
 	{
 		while ((getline(&buffer, &buff_size, stdin)) != -1)
 		{
+			getline_buffer = realloc(getline_buffer, strlen(getline_buffer) + strlen(buffer) + 1);
 			strcat(getline_buffer, buffer);
 			free(buffer);
 			buffer = NULL;
