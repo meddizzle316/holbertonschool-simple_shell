@@ -7,14 +7,16 @@
 char *getline_buffer(void)
 {
 	int characters, i;
-	char *getline_buffer = NULL;
+	char *getline_buffer = NULL, *buffer = NULL;
 	size_t buff_size = 0;
-
-	/*printf("getline_buffer = %s\n", getline_buffer);remove later*/
-	characters = getline(&getline_buffer, &buff_size, stdin);
-	if (characters <= 0 || getline_buffer == NULL)
+	
+	getline_buffer = malloc(sizeof(char*) * 10);
+	while ((characters = getline(&buffer, &buff_size, stdin)) != -1)
 	{
-		/*printf("in getline_buffer() - characters/getline() failed\n");remove later*/
+		strcat(getline_buffer, buffer);
+	}
+	if (getline_buffer == NULL)
+	{
 		free(getline_buffer);
 		getline_buffer = NULL;
 		return (NULL);
@@ -23,7 +25,7 @@ char *getline_buffer(void)
 	{
 		if (getline_buffer[i] == '\n')
 		{
-			getline_buffer[i] = '\0';
+			getline_buffer[i] = ' ';
 		}
 	}
 	return (getline_buffer);

@@ -6,7 +6,7 @@
  */
 int main (void)
 { 
-	char *get_line_buffer, *full_path, **tokenized_array, **tmp_array, *tmp_path;
+	char *get_line_buffer = NULL, *full_path = NULL, **tokenized_array, **tmp_array, *tmp_path = NULL;
 	int x = 0, value, flag = 0;
 	size_t tokenized_array_size = 12;
 	int i;
@@ -38,7 +38,14 @@ int main (void)
 			break;
 		}
 		tokenized_array = tokenize_array(get_line_buffer, tokenized_array_size);
-		tmp_array = malloc(sizeof(char*) * tokenized_array_size);
+		tmp_array = malloc(sizeof(char*) * 5);
+		if (!tmp_array)
+		{
+			free(tmp_array);
+			return (-1);
+		}
+		for (i = 0; i < 5; i++)
+			tmp_array[i] = NULL;
 		i = 0;
 		while (tokenized_array[i])
 		{
