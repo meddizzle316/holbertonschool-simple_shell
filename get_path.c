@@ -78,6 +78,7 @@ void free_array(char **array)
 /*
  * find_path - Gets command from main and looks for its correct path
  * @command: Command passed from main
+ * @tokenArray: Array of paths to test command on
  *
  * Return: Full path if found. NULL if no path found
  */
