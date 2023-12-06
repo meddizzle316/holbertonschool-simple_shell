@@ -1,15 +1,15 @@
 #include "main.h"
 /*
  * main - entry point into program
+ * SETTING LATER BECAUSE HELL NAH TO ALL THESE VARIABLES AND WE ARE REFACTORING ANYWAY
  *
  * Return: 0 on success
  */
 int main (void)
 { 
 	char *get_line_buffer = NULL, *full_path = NULL, **tokenized_array, *tmp_path = NULL;
-	int x = 0, value, flag = 0;
+	int x = 0, value, flag = 0, i;
 	size_t tokenized_array_size = 12;
-	int i;
 	char *path; /*added path variable to main, finding PATH once */
 	char **tokenArray; /*added tokenArray to main, tokenizing Path once */
 	char **tmp_array;
