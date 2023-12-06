@@ -6,7 +6,7 @@
  *
  * Return: 0 if success, -1 if failure
  */
-int fork_process(char **tokenized_array, char* full_path)
+int fork_process(char **tokenized_array, char *full_path)
 {
 	pid_t my_pid;
 	int status;
