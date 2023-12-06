@@ -1,7 +1,6 @@
 #include "main.h"
 /*
  * main - entry point into program
- * SETTING LATER BECAUSE HELL NAH TO ALL THESE VARIABLES AND WE ARE REFACTORING ANYWAY
  *
  * Return: 0 on success
  */
