@@ -13,18 +13,18 @@ int main (void)
 	char **tokenArray; /*added tokenArray to main, tokenizing Path once */
 	char **tmp_array;
 	int tmp_path_is_null;
+	int path_exists;
 
+	path_exists = 0;
+	tokenArray = NULL;
 	path = get_path_var();
-	/*if (!path)
-	 * 	return (-1);
-	 */
-	tokenArray = tokenize_path(path);
-	/*if (!tokenArray)
-	 *{
-	 *	free_array(tokenArray);
-	 *	return (-1);
-	 *}
-	 */
+	/* free(path); */
+	/* path = NULL; */
+	if (path)
+	{
+		path_exists = 1;
+		tokenArray = tokenize_path(path);
+	}
 	while (!feof(stdin))
 	{
 		/*checks if connected to terminal. If it is (print prompt and return 0) if not (return 1)*/
@@ -78,7 +78,10 @@ int main (void)
 				{
 					free_array(tmp_array);
 					free_array(tokenized_array);
-					free_array(tokenArray);
+					if (path_exists == 1)
+					{
+						free_array(tokenArray);
+					}
 					exit(127);
 				}
 			}
@@ -101,7 +104,7 @@ int main (void)
 		if (flag == 1)/*if not connect to terminal*/
 			break;
 	}
-	if (tokenArray)
+	if (path_exists == 1)
 	{
 		free_array(tokenArray);
 	}

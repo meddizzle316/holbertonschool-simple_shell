@@ -100,7 +100,7 @@ char *find_path(char *command, char **tokenArray)
 	 * loop through tokens, concat "command" to the end
 	 * of each token and test it's status
 	 */
-	while (tokenArray[i])
+	while (tokenArray && tokenArray[i])
 	{
 		catToken = malloc(strlen(tokenArray[i]) + strlen(command) + 2);
 		if (!catToken)
