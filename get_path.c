@@ -14,7 +14,8 @@ char *get_path_var()
 	{
 		if ((strncmp(environ[i], "PATH=", 5)) == 0)
 		{
-			path = environ[i] + 5;
+			path = malloc(sizeof(char) * strlen(environ[i]) + 1);
+			strcpy(path, environ[i] + 5);
 		}
 		i++;
 	}
@@ -54,6 +55,7 @@ char **tokenize_path(char *path)
 		i++;
 	}
 	tokenArray[i] = NULL;
+	free(path);
 	return (tokenArray);
 }
 /*
