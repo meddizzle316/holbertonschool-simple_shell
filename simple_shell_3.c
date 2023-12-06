@@ -74,7 +74,7 @@ int main (void)
 			}
 			else if (full_path == NULL)
 			{
-				fprintf(stderr, "./%s: 1: %s: not found\n", __FILE__, tokenized_array[i]);
+				fprintf(stderr, "./hsh: 1: %s: not found\n", tokenized_array[i]);
 				if (flag == 1)
 				{
 					free_array(tmp_array);
