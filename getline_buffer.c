@@ -1,6 +1,7 @@
 #include "main.h"
 /*
  * getline_buffer - Takes input from stdin and removes \n
+ * @flag: 1 if not connect to terminal. 0 if connected
  *
  * Return: variable containing input from stdin
  */
@@ -10,11 +11,12 @@ char *getline_buffer(int flag)
 	char *getline_buffer = NULL, *buffer = NULL;
 	size_t buff_size = 0;
 
-	getline_buffer = malloc(sizeof(char *) * 5);
-	getline_buffer[0] = '\0';
 	if (flag == 1)
 	{
-		while ((getline(&buffer, &buff_size, stdin)) != -1)
+	getline_buffer = malloc(sizeof(char *) * 5);
+	getline_buffer[0] = '\0';
+		
+	while ((getline(&buffer, &buff_size, stdin)) != -1)
 		{
 			getline_buffer = realloc(getline_buffer, strlen(getline_buffer) + strlen(buffer) + 1);
 			strcat(getline_buffer, buffer);

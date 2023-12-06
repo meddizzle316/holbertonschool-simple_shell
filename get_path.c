@@ -14,7 +14,8 @@ char *get_path_var()
 	{
 		if ((strncmp(environ[i], "PATH=", 5)) == 0)
 		{
-			path = environ[i] + 5;
+			path = malloc(sizeof(char) * strlen(environ[i]) + 1);
+			strcpy(path, environ[i] + 5);
 		}
 		i++;
 	}
@@ -54,6 +55,7 @@ char **tokenize_path(char *path)
 		i++;
 	}
 	tokenArray[i] = NULL;
+	free(path);
 	return (tokenArray);
 }
 /*
@@ -76,6 +78,7 @@ void free_array(char **array)
 /*
  * find_path - Gets command from main and looks for its correct path
  * @command: Command passed from main
+ * @tokenArray: Array of paths to test command on
  *
  * Return: Full path if found. NULL if no path found
  */
@@ -102,6 +105,7 @@ char *find_path(char *command, char **tokenArray)
 		catToken = malloc(strlen(tokenArray[i]) + strlen(command) + 2);
 		if (!catToken)
 		{
+			printf("catToken malloc fail");
 			return (NULL);
 		}
 		strcpy(catToken, tokenArray[i]);
