@@ -82,7 +82,6 @@ int main (void)
 					free_array(tokenArray);
 					exit(127);
 				}
-		
 			}
 			if (value == -1)
 			{
