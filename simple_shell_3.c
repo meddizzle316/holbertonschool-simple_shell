@@ -1,7 +1,6 @@
 #include "main.h"
 /*
  * main - entry point into program
- * SETTING LATER BECAUSE HELL NAH TO ALL THESE VARIABLES AND WE ARE REFACTORING ANYWAY
  *
  * Return: 0 on success
  */
@@ -14,18 +13,18 @@ int main (void)
 	char **tokenArray; /*added tokenArray to main, tokenizing Path once */
 	char **tmp_array;
 	int tmp_path_is_null;
+	int path_exists;
 
+	path_exists = 0;
+	tokenArray = NULL;
 	path = get_path_var();
-	/*if (!path)
-	 * 	return (-1);
-	 */
-	tokenArray = tokenize_path(path);
-	/*if (!tokenArray)
-	 *{
-	 *	free_array(tokenArray);
-	 *	return (-1);
-	 *}
-	 */
+	/* free(path); */
+	/* path = NULL; */
+	if (path)
+	{
+		path_exists = 1;
+		tokenArray = tokenize_path(path);
+	}
 	while (!feof(stdin))
 	{
 		/*checks if connected to terminal. If it is (print prompt and return 0) if not (return 1)*/
@@ -74,12 +73,25 @@ int main (void)
 			}
 			else if (full_path == NULL)
 			{
+				if (!strcmp(tokenized_array[i], "exit"))
+				{
+                                        free_array(tmp_array);
+                                        free_array(tokenized_array);
+                                        if (path_exists == 1)
+                                        {
+                                                free_array(tokenArray);
+                                        }
+					exit(2);
+				}
 				fprintf(stderr, "./hsh: 1: %s: not found\n", tokenized_array[i]);
 				if (flag == 1)
 				{
 					free_array(tmp_array);
 					free_array(tokenized_array);
-					free_array(tokenArray);
+					if (path_exists == 1)
+					{
+						free_array(tokenArray);
+					}
 					exit(127);
 				}
 			}
@@ -102,7 +114,7 @@ int main (void)
 		if (flag == 1)/*if not connect to terminal*/
 			break;
 	}
-	if (tokenArray)
+	if (path_exists == 1)
 	{
 		free_array(tokenArray);
 	}

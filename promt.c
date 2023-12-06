@@ -1,14 +1,15 @@
 #include "main.h"
 /*
- * promt - checks if stdin is connected to a terminal and promts if so
+ * prompt - checks if stdin is connected to a terminal and promts if so
  *
  * Return: 0 if connected 1 if not
  */
-int prompt()
+int prompt(void)
 {
-	if (isatty(STDIN_FILENO))/*if connected to terminal(print promt) else (set flag to break loop)*/
+	/*if connected to terminal(print promt) else (set flag to break loop)*/
+	if (isatty(STDIN_FILENO))
 		printf("$ ");
-	else/*not connected to terminal*/
+	else
 		return (1);
 	return (0);
 }

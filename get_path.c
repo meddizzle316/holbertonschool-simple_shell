@@ -67,13 +67,13 @@ char **tokenize_path(char *path)
 void free_array(char **array)
 {
 	int i = 0;
-	while (array[i])
-		{
-			free(array[i]);
-			i++;
-		}
-	free(array);
 
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }
 /*
  * find_path - Gets command from main and looks for its correct path
@@ -85,13 +85,13 @@ void free_array(char **array)
 char *find_path(char *command, char **tokenArray)
 {
 	struct stat fileInfo;
-	struct stat file;
+	struct stat f;
 	char *catToken;
 	int i = 0;
 	char *copied_command;
 	/*Checks if command is already a valid path*/
-	if (stat(command, &file) == 0 && file.st_mode & S_IXUSR && S_ISREG(file.st_mode))
-	{	
+	if (stat(command, &f) == 0 && f.st_mode & S_IXUSR && S_ISREG(f.st_mode))
+	{
 		copied_command = malloc(sizeof(char) * strlen(command) + 2);
 		strcpy(copied_command, command);
 		return (copied_command);
@@ -100,7 +100,7 @@ char *find_path(char *command, char **tokenArray)
 	 * loop through tokens, concat "command" to the end
 	 * of each token and test it's status
 	 */
-	while (tokenArray[i])
+	while (tokenArray && tokenArray[i])
 	{
 		catToken = malloc(strlen(tokenArray[i]) + strlen(command) + 2);
 		if (!catToken)
