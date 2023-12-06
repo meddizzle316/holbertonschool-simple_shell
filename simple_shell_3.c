@@ -57,7 +57,7 @@ int main (void)
 		{
 			tmp_path_is_null = 1;
 			full_path = find_path(tokenized_array[i], tokenArray);/*if array[0] is full path it just returns array[0]*/
-			if (tokenized_array[i + 1])
+			if (tokenized_array[i + 1] && full_path != NULL)
 			{
 				tmp_path_is_null = 0;
 				tmp_path = find_path(tokenized_array[i + 1], tokenArray);
@@ -71,6 +71,18 @@ int main (void)
 					i++;
 				}
 				value = fork_process(tmp_array, full_path);
+			}
+			else if (full_path == NULL)
+			{
+				fprintf(stderr, "./hsh: 1: %s: not found\n", tokenized_array[i]);
+				if (flag == 1)
+				{
+					free_array(tmp_array);
+					free_array(tokenized_array);
+					free_array(tokenArray);
+					exit(127);
+				}
+		
 			}
 			if (value == -1)
 			{
