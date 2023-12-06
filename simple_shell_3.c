@@ -78,7 +78,10 @@ int main (void)
 				{
 					free_array(tmp_array);
 					free_array(tokenized_array);
-					free_array(tokenArray);
+					if (path_exists == 1)
+					{
+						free_array(tokenArray);
+					}
 					exit(127);
 				}
 			}
