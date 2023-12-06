@@ -1,6 +1,7 @@
 #include "main.h"
 /*
  * getline_buffer - Takes input from stdin and removes \n
+ * @flag: 1 if not connect to terminal. 0 if connected
  *
  * Return: variable containing input from stdin
  */
