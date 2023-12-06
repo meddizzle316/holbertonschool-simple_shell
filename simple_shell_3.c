@@ -73,6 +73,16 @@ int main (void)
 			}
 			else if (full_path == NULL)
 			{
+				if (!strcmp(tokenized_array[i], "exit"))
+				{
+                                        free_array(tmp_array);
+                                        free_array(tokenized_array);
+                                        if (path_exists == 1)
+                                        {
+                                                free_array(tokenArray);
+                                        }
+					exit(2);
+				}
 				fprintf(stderr, "./hsh: 1: %s: not found\n", tokenized_array[i]);
 				if (flag == 1)
 				{
