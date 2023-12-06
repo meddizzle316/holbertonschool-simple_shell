@@ -104,6 +104,7 @@ char *find_path(char *command, char **tokenArray)
 		catToken = malloc(strlen(tokenArray[i]) + strlen(command) + 2);
 		if (!catToken)
 		{
+			printf("catToken malloc fail");
 			return (NULL);
 		}
 		strcpy(catToken, tokenArray[i]);
