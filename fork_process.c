@@ -2,6 +2,7 @@
 /**
  * fork_process - creates a new child and executes said child
  * @tokenized_array: array of tokenized words/commands
+ * @full_path: full path to run in exeve
  *
  * Return: 0 if success, -1 if failure
  */
