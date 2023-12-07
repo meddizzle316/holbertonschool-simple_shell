@@ -17,7 +17,7 @@ int main (void)
 
 	path_exists = 0;
 	tokenArray = NULL;
-	path = get_path_var();
+	path = get_path_var(); 
 	/* free(path); */
 	/* path = NULL; */
 	if (path)
