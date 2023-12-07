@@ -1,7 +1,6 @@
 #include "main.h"
 /**
  * tokenize_array - Tokenizes our getline string into multiple commands
- * @tokenized_array: array to hold the result
  * @getline_buffer: buffer to be tokenized
  *
  * Return: an array of words
