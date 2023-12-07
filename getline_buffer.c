@@ -1,6 +1,6 @@
 #include "main.h"
 /*
- * getline_buffer - Takes input from stdin and removes \n
+ * getline_buffer - Takes input from stdin and removes newline char
  * @flag: 1 if not connect to terminal. 0 if connected
  *
  * Return: variable containing input from stdin
@@ -37,9 +37,7 @@ char *getline_buffer(int flag)
 	for (i = 0; getline_buffer[i]; i++)
 	{
 		if (getline_buffer[i] == '\n')
-		{
 			getline_buffer[i] = ' ';
-		}
 	}
 	free(buffer);
 	buffer = NULL;
