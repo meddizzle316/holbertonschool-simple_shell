@@ -1,5 +1,5 @@
 #include "main.h"
-/*
+/**
  * getline_buffer - Takes input from stdin and removes newline char
  * @flag: 1 if not connect to terminal. 0 if connected
  *
