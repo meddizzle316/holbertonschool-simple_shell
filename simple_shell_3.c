@@ -6,7 +6,7 @@
  */
 int main (void)
 { 
-	char *get_line_buffer = NULL, **tokenized_array;
+	char *get_line_buffer = NULL, **tokenized_array = NULL;
 	int flag = 0, path_exists = 0;
 	char *path, **tokenArray = NULL;
 

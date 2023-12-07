@@ -2,7 +2,7 @@
 void execute_path(char **tokenized_array, char **tokenArray, int path_exists, int flag)
 {
 	int i, tmp_path_is_null;
-	char **tmp_array, *full_path, *tmp_path;
+	char **tmp_array = NULL, *full_path = NULL, *tmp_path = NULL;
 
 	tmp_array = init_tmp_array(tokenized_array, 5);
 	for (i = 0; tokenized_array[i]; i++)
@@ -17,7 +17,7 @@ void execute_path(char **tokenized_array, char **tokenArray, int path_exists, in
 		if(full_path)
 		{
 			tmp_array[0] = tokenized_array[i];
-			if (!tmp_path && tokenized_array[i + 1] != NULL)
+			if (!tmp_path && tokenized_array[i + 1])
 			{
 				tmp_array[1] = tokenized_array[i + 1];
 				i++;
