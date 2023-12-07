@@ -7,13 +7,10 @@
 int main (void)
 { 
 	char *get_line_buffer = NULL, *full_path = NULL, **tokenized_array, *tmp_path = NULL;
-	int value = 0, flag = 0, i;
+	int value = 0, flag = 0, i, tmp_path_is_null, path_exists = 0;
 	size_t tokenized_array_size = 12;
-	char *path, **tokenArray, **tmp_array;
-	int tmp_path_is_null, path_exists;
+	char *path, **tokenArray = NULL, **tmp_array;
 
-	path_exists = 0;
-	tokenArray = NULL;
 	path = get_path_var(); 
 	if (path)
 	{
@@ -26,14 +23,14 @@ int main (void)
 		get_line_buffer = getline_buffer(flag);
 		if (get_line_buffer == NULL)
 			free_before_while_loop(get_line_buffer, tokenArray, path_exists, -1);
-		if (!strcmp(get_line_buffer, "exit "))/*broken somehow*/
+		if (!strcmp(get_line_buffer, "exit "))
 			free_before_while_loop(get_line_buffer, tokenArray, path_exists, 0);
 		tokenized_array = tokenize_array(get_line_buffer, tokenized_array_size);
 		tmp_array = init_tmp_array(tokenized_array, 5);
 		for (i = 0; tokenized_array[i]; i++)
 		{
 			tmp_path_is_null = 1;
-			full_path = find_path(tokenized_array[i], tokenArray);/*if array[0] is full path it just returns array[0]*/
+			full_path = find_path(tokenized_array[i], tokenArray);
 			if (tokenized_array[i + 1] && full_path != NULL)
 			{
 				tmp_path_is_null = 0;
