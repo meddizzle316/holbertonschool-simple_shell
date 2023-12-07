@@ -1,0 +1,76 @@
+.TH simple_shell_3 1 "12/7/2023" "v3.0" "Script Manual"
+.SH NAME
+simple_shell_3 \- A shell command line interpreter for Holberton school.
+
+.SH SYNOPSIS
+[\fICOMMAND\fR] \fIFLAG\fR or \fI/DIR\fR
+
+.SH DESCRIPTION
+This shell is a command interpreter that executes commands read from the standard input or from file. The command is read, found in the path variable, and then executed. Multiple commands can be given in a single prompt as well as flags for each of those commands. When a user wants to leave the shell they can simply type "exit" as argument[0].
+
+.PP
+This shell will run any valid command that is stored locally in the path variable as it will search for the correct path of any given command.
+
+.SH OPTIONS
+Commands given are a sequence of optional variable assignments followed by blank-separated words and redirections, 
+and terminated by a control operator.  The first word specifies the command to be
+executed, and is passed as argument zero.  The remaining words are passed as arguments to the invoked command.
+.TP
+\fB[COMMAND] FLAG\fR
+Format to run any valid command from the PATH variable. Argument[0] is the command you wish to run while argument[1] is the flag you want to run that command with.
+.TP
+\fB[COMMAND] /DIR\fR
+Format to run and valid command from the PATH variable. Argument[0] is the command you wish to run while argument[1] is the directory which you wish to run that command.
+
+.SH EXAMPLES
+.SS
+.B [ls -la]
+.PP
+This example runs the \fBls\fR command with the -la flag using the input from \fISTDIN\fR.
+.SS
+.B [/bin/ls]
+.PP
+This example runs the \fBls\fR command using the full path as input from the \fISTDIN\fR.
+.SS
+.B [echo "ls -la" | ./simple_shell_3]
+.PP
+This example runs the \fBls\fR command with the -la flag using the input from the \fISTDIN\fR file.
+
+.SH RESERVED WORDS
+These are words reserved for the program and serve a specific purpose.
+.SS
+.B [exit]
+.PP
+The word [exit] is used to exit the shell and quit the program. Return value (0);
+
+.SH RETURN VALUE
+.PP
+The return value of simple_shell_3 is its exit status. This is used in the case of success as well as failure of the shell.
+.PP
+.SS
+.BI (status) [0]:
+.PP
+The program has ran and exited successfully.
+
+.PP
+.SS
+.BI (status) [2]:
+.PP
+The program has ran and encountered a major problem.
+
+.PP
+.SS
+.BI (status) [127]:
+.PP
+The program has ran and the command given was not found.
+
+.PP
+.SS
+.BI (status) [-1]:
+.PP
+Program failed to read prompt from user.
+
+.SH AUTHORS
+David Meddaugh <Meddizzle316@gmail.com>
+.PP
+David Alsabrook <Dfalsabrook@gmail.com>

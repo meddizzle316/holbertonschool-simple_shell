@@ -1,6 +1,6 @@
 #include "main.h"
 
-/*
+/**
  * get_path_var - finds the path variable in environ
  *
  * Return: Path variable
@@ -21,7 +21,7 @@ char *get_path_var()
 	}
 	return (path);
 }
-/*
+/**
  * tokenize_path - Takes path from get_path_var and tokenizes it
  * @path: Path passed in by get_path_var
  *
@@ -58,7 +58,7 @@ char **tokenize_path(char *path)
 	free(path);
 	return (tokenArray);
 }
-/*
+/**
  * free_array - Tool to loop through an array and free each pointer
  * @array: An array to free
  *
@@ -75,7 +75,7 @@ void free_array(char **array)
 	}
 	free(array);
 }
-/*
+/**
  * find_path - Gets command from main and looks for its correct path
  * @command: Command passed from main
  * @tokenArray: Array of paths to test command on
