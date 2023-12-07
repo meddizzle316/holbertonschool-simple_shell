@@ -1,5 +1,5 @@
 #include "main.h"
-/*
+/**
  * main - entry point into program
  *
  * Return: 0 on success
