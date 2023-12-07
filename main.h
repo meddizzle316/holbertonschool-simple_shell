@@ -19,5 +19,8 @@ void free_array(char **array);
 int prompt();
 char **tokenize_path(char *path);
 char *get_path_var();
+void free_all(char** tmp, char** arg, int path_exists, char** path, int status);
+char **init_tmp_array(char** tokenized_array, int size);
+void free_before_while_loop(char *buf, char **path, int path_exists, int stat);
 
 #endif
