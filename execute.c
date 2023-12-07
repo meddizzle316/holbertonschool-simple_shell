@@ -25,10 +25,10 @@ void execute_path(char **args, char **tokenArray, int path_exists, int flag)
 		}
 		if (full_path)
 		{
-			/* tmp_array[0] = args[i]; */
+			tmp_array[0] = args[i]; 
 			if (!tmp_path && args[i + 1])
 			{
-				tmp_array[0] = args[i + 1];
+				tmp_array[1] = args[i + 1];
 				i++;
 			}
 			fork_process(tmp_array, full_path);
