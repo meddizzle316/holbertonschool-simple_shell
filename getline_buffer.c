@@ -35,8 +35,10 @@ char *getline_buffer(int flag)
 		return (NULL);
 	}
 	for (i = 0; getline_buffer[i]; i++)
+	{
 		if (getline_buffer[i] == '\n')
 			getline_buffer[i] = ' ';
+	}
 	free(buffer);
 	buffer = NULL;
 	return (getline_buffer);

@@ -6,13 +6,13 @@
  *
  * Return: an array of words
  */
-char **tokenize_array(char *getline_buffer, size_t tokenized_buffer_size)
+char **tokenize_array(char *getline_buffer)
 {
 	char *token;
 	int i;
-	char **tokenized_array;
-	char *stored_buffer;
-	
+	char **tokenized_array, *stored_buffer;
+	size_t tokenized_buffer_size = 12;
+
 	tokenized_array = malloc(sizeof(char *) * tokenized_buffer_size);
 	i = 0;
 	token = strtok(getline_buffer, " ");
