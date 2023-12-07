@@ -16,7 +16,7 @@ int main(void)
 		path_exists = 1;
 		tokenArray = tokenize_path(path);
 	}
-	while (!feof(stdin))
+	while (1)
 	{
 		flag = prompt();
 		get_line_buffer = getline_buffer(flag);
