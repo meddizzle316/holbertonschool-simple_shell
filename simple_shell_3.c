@@ -1,16 +1,16 @@
 #include "main.h"
-/*
+/**
  * main - entry point into program
  *
  * Return: 0 on success
  */
-int main (void)
-{ 
+int main(void)
+{
 	char *get_line_buffer = NULL, **tokenized_array = NULL;
 	int flag = 0, path_exists = 0;
 	char *path, **tokenArray = NULL;
 
-	path = get_path_var(); 
+	path = get_path_var();
 	if (path)
 	{
 		path_exists = 1;
@@ -32,5 +32,5 @@ int main (void)
 	}
 	if (path_exists == 1)
 		free_array(tokenArray);
-	exit (0);
+	exit(0);
 }

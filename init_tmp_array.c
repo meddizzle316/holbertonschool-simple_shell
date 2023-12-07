@@ -1,11 +1,11 @@
 #include "main.h"
 /**
- * init_tmp_array - initailizes tmp_array 
+ * init_tmp_array - initailizes tmp_array
  * @tokenized_array: necessary to free if fails
  * @size: size of intended array
  * Return: pointer to newly malloced tmp_array
  */
-char **init_tmp_array(char** tokenized_array, int size)
+char **init_tmp_array(char **tokenized_array, int size)
 {
 	char **tmp_array;
 	int i;
