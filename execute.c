@@ -30,18 +30,6 @@ void execute_path(char **args, char **tokenArray, int path_exists, int flag)
 			}
 		}
 		tmp_array = set_tmp(tmp_array, args, full_path, tmp_path, last_path, &i);
-		/**
-		 * if (full_path)
-		{
-			tmp_array[0] = args[i];
-			if (!tmp_path && args[i + 1])
-			{
-				tmp_array[1] = args[i + 1];
-				i++;
-			}
-			fork_process(tmp_array, full_path);
-		}
-		*/
 		if (full_path)
 		{
 			fork_process(tmp_array, full_path);
