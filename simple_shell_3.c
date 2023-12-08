@@ -24,6 +24,11 @@ int main(void)
 			free_before_while_loop(get_line_buffer, tokenArray, path_exists, -1);
 		if (!strcmp(get_line_buffer, "exit "))
 			free_before_while_loop(get_line_buffer, tokenArray, path_exists, 0);
+		if (!strcmp(get_line_buffer, "env"))
+		{
+			print_env();
+			free_before_while_loop(get_line_buffer, tokenArray, path_exists, 0);
+		}
 		tokenized_array = tokenize_array(get_line_buffer);
 		execute_path(tokenized_array, tokenArray, path_exists, flag);
 		free_array(tokenized_array);
