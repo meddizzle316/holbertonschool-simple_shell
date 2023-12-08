@@ -23,5 +23,6 @@ void free_all(char **tmp, char **arg, int path_exists, char **path, int stat);
 char **init_tmp_array(char **tokenized_array, int size);
 void free_before_while_loop(char *buf, char **path, int path_exists, int stat);
 void execute_path(char **args, char **tokenArray, int path_exist, int flag);
+void print_env(void);
 
 #endif
