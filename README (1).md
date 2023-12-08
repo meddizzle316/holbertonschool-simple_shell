@@ -1,6 +1,6 @@
 
 # Simple Shell v3.0
-We have recreated a simple shell environment in C (using C89). It successfully takes in a command and one additional argument (either a flag or a directory). Input can be either connected to the terminal or piped in.
+We have recreated a simple shell environment in C (using C89). It successfully takes in a command and two additional arguments (either a flag, directory or other input). Input can be either connected to the terminal or piped in.
 
 
 
@@ -37,10 +37,10 @@ In much the same way as we tokenized the path, we then tokenize the user input, 
 Next, we go to the execute_path function. This function loops through tokenized_array (at index of i), and checks using the find_path function, whether they are commands, are files and are executable (we do this using the stat function). If find_path encounters a full path, it returns it in a newly malloced block of memory (in execute_path this is becomes the value of "full_path"). If not, then it iterates through the path, concatenates the command to the end of each path (each directory represented by tokenArray[i]) and then checks whether the resulting string (concatenated token -- catToken) is a command. If it is, it returns catToken as the value of full_path. If not, it frees catToken and returns NULL.
 
 #### Checking for flags/accompanying directories
-Here's where our code, self admittedly, gets a little..unconventional. If the next element in the tokenized_array exists (tokenized userinput) and full_path is not NULL (which means the process at line 20 has succeeded in finding a valid path with the input) then the int-as-bool variable tmp_path_is_null is set to 0 (meaning we need to free it later, hence the boolean) and then we run the find_path operation again on the next variable and save the result as tmp_path.
+Here's where our code, self admittedly, gets a little..unconventional. If the next element in the tokenized_array exists (tokenized userinput) and full_path is not NULL (which means the process at line 20 has succeeded in finding a valid path with the input) then the int-as-bool variable tmp_path_is_null is set to 0 (meaning we need to free it later, hence the boolean) and then we run the find_path operation again on the next variable and save the result as tmp_path. If tmp_path == NULL (meaning it is not a command) and args[i + 2] exists, then we run another operation, variable last_path (the third argument to be passed to execve) runs a find_path operation on args[i + 2]. We realize this is not optimal code, but it is functional code, which is it's only redeeming quality.
 
 #### Creating the arguments for execve
-Setting out to create an array of args to pass to the execve function, we use the tmp_array we've already initialized and malloced in line 16, adding the next "arg" to it ONLY if full_path is not null, the element exists and tmp_path is not a command itself (represented by being NULL), also incrementing the i counter so that we skip over the "non-command" that we've just added.
+Setting out to create an array of args to pass to the execve function, we use the tmp_array we've already initialized and malloced in line 16. The elements of the tmp_array are set by the set_tmp function. This function takes in the full_path, tmp_path and last_path (the first, second and third arguments respectively which are renamed in the function as a, b and c). If full_path is a command, it appends it. If tmp_path and last_path are not commands and they exist, they are added to the tmp_array. Then the tmp_array is returned.
 
 #### Forking and running the command
 The tmp_array and full_path variables are then passed to fork_process function. The fork process function utilizes the fork function to create a child process and return a process ID. If the process ID indicates that it is the child process (my_pid == 0) then it runs the command using execve, taking full_path (the successful concatenation of the PATH and the userinput that passes the "is-this-a-command" check), the tmp_array as a second paramenter and environ as a third. If this process fails, it returns -1. The parent process waits until the child process has completed and then terminates the process, returning to the execute_path function. 
@@ -89,5 +89,6 @@ This is a list of all who contributed to this project.
 | `tokenize_path` | `double char pointer [array of strings]` | tokenizes user input using strtok and returns tokenized array |
 | `get_path_var` | `string` | returns a pointer to a path variable, extracted from environ |
 | `init_tmp_array` | `char double pointer[array of strings]` | initializes, sets to null and returns a newly malloc'd tmp_array |
+| `set_tmp` | `char double pointer[array of strings]` | determines inputs for the tmp_array to go to execve as 2nd argument |
 
 
