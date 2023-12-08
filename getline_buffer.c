@@ -10,7 +10,7 @@ char *getline_buffer(int flag)
 	int i, len;
 	char *getline_buffer = NULL, *buffer = NULL;
 	size_t buff_size = 0;
-
+	int characters_read = 0;
 	if (flag == 1)
 	{
 		getline_buffer = malloc(sizeof(char *) * 5);
@@ -25,8 +25,8 @@ char *getline_buffer(int flag)
 		}
 	}
 	if (flag == 0)
-		getline(&getline_buffer, &buff_size, stdin);
-	if (getline_buffer == NULL)
+		characters_read = getline(&getline_buffer, &buff_size, stdin);
+	if (getline_buffer == NULL || characters_read == -1)
 	{
 		free(buffer);
 		free(getline_buffer);
