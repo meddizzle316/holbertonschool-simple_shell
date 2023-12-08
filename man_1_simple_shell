@@ -3,7 +3,7 @@
 simple_shell_3 \- A shell command line interpreter for Holberton school.
 
 .SH SYNOPSIS
-[\fICOMMAND\fR] \fIFLAG\fR or \fI/DIR\fR
+[\fICOMMAND\fR] \fIFLAG\fR \fI/DIR\fR
 
 .SH DESCRIPTION
 This shell is a command interpreter that executes commands read from the standard input or from file. The command is read, found in the path variable, and then executed. Multiple commands can be given in a single prompt as well as flags for each of those commands. When a user wants to leave the shell they can simply type "exit" as argument[0].
@@ -21,6 +21,9 @@ Format to run any valid command from the PATH variable. Argument[0] is the comma
 .TP
 \fB[COMMAND] /DIR\fR
 Format to run and valid command from the PATH variable. Argument[0] is the command you wish to run while argument[1] is the directory which you wish to run that command.
+.TP
+\fB[COMMAND] FLAG /DIR\fR
+Format to run and valid command from the PATH variable. Argument[0] is the command you wish to run, argument[1] is the flag for that command, while argument[2] is the directory which you wish to run that command.
 
 .SH EXAMPLES
 .SS
